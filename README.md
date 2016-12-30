@@ -69,3 +69,48 @@ Most C files are licensed under GNU General Public License (GPL), version 2.
 [driver-downloads]: http://support.dlink.com.au/Download/download.aspx?product=DWA-131
 [direct-download]: ftp://files.dlink.com.au/products/DWA-131/REV_E/Drivers/DWA-131_Linux_driver_v4.3.1.1.zip
 [initial-commit]: https://github.com/Mange/rtl8192eu-linux-driver/commit/1387cf623d54bc2caec533e72ee18ef3b6a1db29
+
+## EFuse setting (from [anykaguo][anykaguo-info])
+  ```shell
+  $ iwpriv wlan0 efuse_get realmap    //dump efuse table and check b8 value
+  ```
+```
+wlan0     efuse_get:
+0x00	29 81 00 7C 01 40 03 00 	40 74 04 50 14 00 00 00 
+0x10	21 21 21 21 21 21 25 25 	25 25 25 EE 0F EF FF FF 
+0x20	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x30	FF FF FF FF FF FF FF FF 	FF FF 1E 1E 1E 1E 1E 1E 
+0x40	24 24 24 24 24 EE 0F EF 	FF FF FF FF FF FF FF FF 
+0x50	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x60	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x70	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x80	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x90	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0xa0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0xb0	FF FF FF FF FF FF FF FF 	21 36 21 00 00 00 FF FF 
+0xc0	FF 01 00 10 00 00 00 FF 	00 00 FF FF FF FF FF FF 
+0xd0	01 20 19 33 66 47 02 70 	62 B8 27 B9 94 09 03 52 
+0xe0	65 61 6C 74 65 6B 1D 03 	57 69 72 65 6C 65 73 73 
+0xf0	20 4E 20 4E 61 6E 6F 20 	55 53 42 20 41 64 61 70 
+0x100	74 65 72 00 FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x110	FF FF FF FF FF FF FF 0D 	03 00 05 00 30 00 00 00 
+0x120	00 93 FF FF FF FF FF 01 	D2 26 0F 74 93 FC 63 0B 
+0x130	F6 A8 98 2D 03 92 98 00 	FC 8C 00 11 9B 44 02 0A 
+0x140	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x150	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x160	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x170	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x180	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x190	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x1a0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x1b0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x1c0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x1d0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x1e0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
+0x1f0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF
+```
+   ```shell
+   $ iwpriv wlan0 efuse_set wmap,b8,20 //modify：efuse offset b8=0x20
+   $ iwpriv wlan0 efuse_get realmap    //check to see b8 value had change
+   ```
+[anykaguo-info]: http://blog.chinaunix.net/uid-30113248-id-4774480.html
