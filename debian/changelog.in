@@ -1,0 +1,5 @@
+rtl8192eu (#VERSION#-#DRIVER_BUILD_VERSION#) unstable; urgency=medium
+
+  * Initial release
+
+ -- jimmy <jimmy@jimmy-alpha>  Thu, 01 Dec 2016 13:09:37 +0800
