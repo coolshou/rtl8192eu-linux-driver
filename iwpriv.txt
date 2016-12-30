@@ -1,0 +1,17 @@
+# iwpriv wlan0 efuse_get realmap  // read form driver for all efuse logic map. 
+# iwpriv wlan0 efuse_get realraw  // read form all HW Efuse phy map. 
+# iwpriv wlan0 efuse_get mac  // read mac address ( Direct to use the cmd  for raed mac address from the efuse content ) 
+# iwpriv wlan0 efuse_get rmap,16,6  // fix offset :cmd,offset,byteCounts ( Specified a start of the efuse's logic address 0x16 offset and set the number of bytes for read the efuse content) 
+# iwpriv wlan0 efuse_get wlrfkrmap,16,6  // fix offset :cmd,offset,byteCounts ( Specified a start of the efuse's logic 0x16 address offset and set the number of bytes for read the fake WiFi efuse content) 
+# iwpriv wlan0 efuse_get wlrfkmap // read form WiFi fake for all efuse logic map.
+
+
+
+
+#iwpriv wlan0 efuse_set wmap,16,00e04c871234  // cmd,offset,Data bytes[hex] ( Specified a offset address for write 6 bytes data "0x00,0xe0,0x4c,0x87,0x12,0x34"  to the 0x16 start of the efuse logic address ) 
+#iwpriv wlan0 efuse_set mac,00e04c871234  // cmd,Data bytes[hex] (Use set mac cmd to write 6 bytes data "0x00,0xe0,0x4c,0x87,0x12,0x34" to the efuse content) 
+#iwpriv wlan0 efuse_set wlwfake,16,00e04c871234  // cmd,offset,Data bytes[hex] ( Specified a offset address for write 6 bytes data "0x00,0xe0,0x4c,0x87,0x12,0x34" to the 0x16 start of the Fake efuse content address ) 
+#iwpriv wlan0 efuse_set wldumpfake  //Dump WiFI HW efuse to Fake WiFI efuse Map. 
+#iwpriv wlan0 efuse_set wlfk2map // Wirte WiFi Fake all efuse map to HW WiFi efuse Map. 
+If config the Driver to use File Map,you can use the following cmd to read current Drv logic map. 
+#iwpriv wlan0 efuse_get drvmap // read form current driver of efuse logic map.
