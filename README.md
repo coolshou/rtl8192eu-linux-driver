@@ -72,7 +72,7 @@ Most C files are licensed under GNU General Public License (GPL), version 2.
 
 ## EFuse setting (from [anykaguo][anykaguo-info])
   ```shell
-  $ iwpriv wlan0 efuse_get realmap    //dump efuse table and check b8 value
+  $ iwpriv wlan0 efuse_get realmap    //dump efuse table and check b8 (country) value 
   ```
 ```
 wlan0     efuse_get:
@@ -113,4 +113,6 @@ wlan0     efuse_get:
    $ iwpriv wlan0 efuse_set wmap,b8,20 //modify：efuse offset b8=0x20
    $ iwpriv wlan0 efuse_get realmap    //check to see b8 value had change
    ```
+
+
 [anykaguo-info]: http://blog.chinaunix.net/uid-30113248-id-4774480.html
