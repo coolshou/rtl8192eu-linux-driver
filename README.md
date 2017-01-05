@@ -72,7 +72,8 @@ Most C files are licensed under GNU General Public License (GPL), version 2.
 
 ## EFuse setting (from [anykaguo][anykaguo-info])
   ```shell
-  $ iwpriv wlan0 efuse_get realmap    //dump efuse table and check b8 (country) value 
+  $ iwpriv wlan0 efuse_get realmap    // read form driver for all efuse logic map. 
+  $ iwpriv wlan0 efuse_get realraw    // read form all HW Efuse phy map. 
   ```
 ```
 wlan0     efuse_get:
