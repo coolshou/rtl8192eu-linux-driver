@@ -2538,7 +2538,7 @@ void rtw_free_netdev(struct net_device *netdev)
 RETURN:
 	return;
 }
-/*
+
 int rtw_change_ifname(_adapter *padapter, const char *ifname)
 {
 	struct dvobj_priv *dvobj;
@@ -2598,7 +2598,7 @@ error:
 	return -1;
 
 }
-*/
+
 #endif
 
 #ifdef PLATFORM_FREEBSD
