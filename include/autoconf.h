@@ -28,8 +28,10 @@
 
 #define PLATFORM_LINUX
 
-/* #define CONFIG_IOCTL_CFG80211 */
-
+//#define CONFIG_WEXT_PRIV  // for iwpriv p2p command
+#ifndef CONFIG_IOCTL_CFG80211
+	#define CONFIG_IOCTL_CFG80211 
+#endif
 #ifdef CONFIG_IOCTL_CFG80211
 	/* #define RTW_USE_CFG80211_STA_EVENT */ /* Indecate new sta asoc through cfg80211_new_sta */
 	#define CONFIG_CFG80211_FORCE_COMPATIBLE_2_6_37_UNDER
@@ -92,8 +94,9 @@
 #define SSMPS_RX_TP_TH	60 /*Mbps*/
 #endif
 
-
-/* #define CONFIG_CONCURRENT_MODE */
+#ifndef CONFIG_CONCURRENT_MODE
+#define CONFIG_CONCURRENT_MODE  /*enable AP+STA mode*/
+#endif
 #ifdef CONFIG_CONCURRENT_MODE
 	#define CONFIG_RUNTIME_PORT_SWITCH
 
@@ -101,7 +104,9 @@
 	/* #define CONFIG_ATMEL_RC_PATCH */
 	/* #define CONFIG_TSF_RESET_OFFLOAD */			/* For 2 PORT TSF SYNC. */
 #endif
-
+#ifndef CONFIG_AP_MODE
+#define CONFIG_AP_MODE
+#endif
 #ifdef CONFIG_AP_MODE
 	/* #define CONFIG_INTERRUPT_BASED_TXBCN */ /* Tx Beacon when driver BCN_OK ,BCN_ERR interrupt occurs */
 	#if defined(CONFIG_CONCURRENT_MODE) && defined(CONFIG_INTERRUPT_BASED_TXBCN)
@@ -120,6 +125,9 @@
 	/* #define	CONFIG_AUTO_AP_MODE */
 #endif
 
+#ifndef CONFIG_P2P
+#define CONFIG_P2P
+#endif
 #ifdef CONFIG_P2P
 	/* The CONFIG_WFD is for supporting the Wi-Fi display */
 	#define CONFIG_WFD
