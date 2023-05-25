@@ -28,7 +28,9 @@
 
 #define PLATFORM_LINUX
 
-//#define CONFIG_WEXT_PRIV  // for iwpriv p2p command
+#ifndef CONFIG_WEXT_PRIV
+#define CONFIG_WEXT_PRIV  /* for iwpriv p2p command*/
+#endif
 #ifndef CONFIG_IOCTL_CFG80211
 	#define CONFIG_IOCTL_CFG80211 
 #endif
