@@ -7,6 +7,10 @@ Also works on Rosewill RNX-N180UBE v2 N300 Wireless Adapter.
 
 **NOTE:** This is just a "mirror". I have no knowledge about this code or how it works. Expect no support from me or any contributors here. I just think GitHub is a nicer way of keeping track of this than random forum posts and precompiled binaries being sent by email. I don't want someone else to have to spend 5 days of googling and compiling with random patches until it works.
 
+## Disable Kernel build in driver
+
+echo install rtl8xxxu /bin/false | sudo tee /etc/modprobe.d/blacklist-rtl8xxxu.conf
+
 ## Source for the official drivers
 
 Official drivers were downloaded from D-Link Australia. D-Link USA and the european countries I checked only lists revision A and B. Australia lists all three.
@@ -15,7 +19,7 @@ Official drivers were downloaded from D-Link Australia. D-Link USA and the europ
 * [Direct download link for Linux drivers][direct-download]
   * GitHub will not link to the `ftp://` schema. Raw link contents:
 
-      `ftp://files.dlink.com.au/products/DWA-131/REV_E/Drivers/DWA-131_Linux_driver_v4.3.1.1.zip`
+    `ftp://files.dlink.com.au/products/DWA-131/REV_E/Drivers/DWA-131_Linux_driver_v4.3.1.1.zip`
 
 In addition, you can find the contents of this version in the initial commit of this repo: [1387cf623d54bc2caec533e72ee18ef3b6a1db29][initial-commit]
 
@@ -34,22 +38,20 @@ from source when the kernel is upgraded (for example using your package manager)
 
 1. Install DKMS and other required tools
 
-    ```shell
-    $ apt-get install git linux-headers-generic build-essential dkms
-    ```
-
+   ```shell
+   $ apt-get install git linux-headers-generic build-essential dkms
+   ```
 2. Add the driver to DKMS. This will copy the source to a system directory so
-that it can used to rebuild the module on kernel upgrades.
+   that it can used to rebuild the module on kernel upgrades.
 
-    ```shell
-    $ dkms add .
-    ```
-
+   ```shell
+   $ dkms add .
+   ```
 3. Build and install the driver.
 
-    ```shell
-    $ dkms install rtl8192eu/1.0
-    ```
+   ```shell
+   $ dkms install rtl8192eu/1.0
+   ```
 
 If you wish to uninstall the driver at a later point, use
 _dkms uninstall rtl8192eu/1.0_. To completely remove the driver from DKMS use
@@ -68,14 +70,12 @@ The original code is copyrighted, but I don't know by whom. The driver download 
 
 Most C files are licensed under GNU General Public License (GPL), version 2.
 
-[driver-downloads]: http://support.dlink.com.au/Download/download.aspx?product=DWA-131
-[direct-download]: ftp://files.dlink.com.au/products/DWA-131/REV_E/Drivers/DWA-131_Linux_driver_v4.3.1.1.zip
-[initial-commit]: https://github.com/Mange/rtl8192eu-linux-driver/commit/1387cf623d54bc2caec533e72ee18ef3b6a1db29
-
 ## EFuse setting (from [anykaguo][anykaguo-info])
-  ```shell
+
+```shell
   $ iwpriv wlan0 efuse_get realmap    // read form driver for all efuse logic map. 
-  ```
+```
+
 ```
 wlan0     efuse_get:
 0x00	29 81 00 7C 01 40 03 00 	40 74 04 50 14 00 00 00 
@@ -111,11 +111,14 @@ wlan0     efuse_get:
 0x1e0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF 
 0x1f0	FF FF FF FF FF FF FF FF 	FF FF FF FF FF FF FF FF
 ```
-   ```shell
+
+```shell
    $ iwpriv wlan0 efuse_get realraw    // read form all HW Efuse phy map. 
    $ iwpriv wlan0 efuse_set wmap,b8,20 //modify：efuse offset b8=0x20
    $ iwpriv wlan0 efuse_get realmap    //check to see b8 value had change
-   ```
+```
 
-
+[driver-downloads]: http://support.dlink.com.au/Download/download.aspx?product=DWA-131
+[direct-download]: ftp://files.dlink.com.au/products/DWA-131/REV_E/Drivers/DWA-131_Linux_driver_v4.3.1.1.zip
+[initial-commit]: https://github.com/Mange/rtl8192eu-linux-driver/commit/1387cf623d54bc2caec533e72ee18ef3b6a1db29
 [anykaguo-info]: http://blog.chinaunix.net/uid-30113248-id-4774480.html
