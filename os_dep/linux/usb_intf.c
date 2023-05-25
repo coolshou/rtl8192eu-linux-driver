@@ -178,7 +178,8 @@ static struct usb_device_id rtw_usb_id_tbl[] = {
 	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0x818B, 0xff, 0xff, 0xff), .driver_info = RTL8192E}, /* Default ID */
 	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0x818C, 0xff, 0xff, 0xff), .driver_info = RTL8192E}, /* Default ID */
 	/*=== Customer ID ===*/
-	{USB_DEVICE(0x2001, 0x3319), .driver_info = RTL8192E}, /* D-Link - DWA-131 */
+	{USB_DEVICE(0x2001, 0x3319), .driver_info = RTL8192E}, /* D-Link - DWA-131 E1*/
+	{USB_DEVICE(0x2c4e, 0x0100), .driver_info = RTL8192E}, /* Mercusys - MW300UM */
 #endif
 
 #ifdef CONFIG_RTL8723B
