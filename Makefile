@@ -22,6 +22,8 @@ endif
 
 ifneq ($(M),)
 src=$(M)
+else
+src=.
 endif
 EXTRA_CFLAGS += -I$(src)/include
 
