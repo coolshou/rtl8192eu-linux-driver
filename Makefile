@@ -20,6 +20,7 @@ ifeq ($(GCC_VER_49),1)
 EXTRA_CFLAGS += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
 endif
 
+src=$(shell pwd)
 EXTRA_CFLAGS += -I$(src)/include
 
 EXTRA_LDFLAGS += --strip-debug
@@ -2351,7 +2352,8 @@ MODULE_NAME := $(USER_MODULE_NAME)
 endif
 
 ifneq ($(KERNELRELEASE),)
-
+KERNELRELEASE := $(shell uname -r)
+endif
 ########### this part for *.mk ############################
 include $(src)/hal/phydm/phydm.mk
 
@@ -2456,11 +2458,11 @@ ifeq ($(CONFIG_RTL8723B), y)
 $(MODULE_NAME)-$(CONFIG_MP_INCLUDED)+= core/rtw_bt_mp.o
 endif
 
+ifneq ($(CONFIG_RTL8192EU),)
 obj-$(CONFIG_RTL8192EU) := $(MODULE_NAME).o
-
 else
-
-export CONFIG_RTL8192EU = m
+obj-m := $(MODULE_NAME).o
+# export CONFIG_RTL8192EU = m
 
 all: modules
 
