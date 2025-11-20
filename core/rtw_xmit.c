@@ -1590,8 +1590,9 @@ static s32 update_attrib(_adapter *padapter, _pkt *pkt, struct pkt_attrib *pattr
 			#endif
 		}
 		DBG_COUNTER(padapter->tx_logs.core_tx_upd_attrib_sta);
-	} else
+	} else {
 		DBG_COUNTER(padapter->tx_logs.core_tx_upd_attrib_unknown);
+	}
 
 get_sta_info:
 	bmcast = IS_MCAST(pattrib->ra);
@@ -1709,8 +1710,9 @@ get_sta_info:
 			}
 		}
 
-	} else if (0x888e == pattrib->ether_type)
+	} else if (0x888e == pattrib->ether_type) {
 		eapol_type = parsing_eapol_packet(padapter, pktfile.cur_addr, psta, 1);
+	}
 #if defined (DBG_ARP_DUMP) || defined (DBG_IP_R_MONITOR)
 	else if (pattrib->ether_type == ETH_P_ARP) {
 		u8 arp[28] = {0};
@@ -1736,8 +1738,9 @@ get_sta_info:
 	if (pkt_type == LPS_PT_SP) {/*packet is as SPECIAL_PACKET*/
 		DBG_COUNTER(padapter->tx_logs.core_tx_upd_attrib_active);
 		rtw_lps_ctrl_wk_cmd(padapter, LPS_CTRL_SPECIAL_PACKET, 0);
-	} else if (pkt_type == LPS_PT_ICMP)
+	} else if (pkt_type == LPS_PT_ICMP) {
 		rtw_lps_ctrl_wk_cmd(padapter, LPS_CTRL_LEAVE, 0);
+	}
 #endif /* CONFIG_LPS */
 
 #ifdef CONFIG_BEAMFORMING
@@ -1798,7 +1801,9 @@ get_sta_info:
 		pattrib->pctrl = _TRUE;
 	else
 #endif
+	{
 		pattrib->pctrl = 0;
+	}
 
 	pattrib->ack_policy = 0;
 
@@ -1896,16 +1901,18 @@ static s32 xmitframe_addmic(_adapter *padapter, struct xmit_frame *pxmitframe)
 
 			if (pframe[1] & 1) { /* ToDS==1 */
 				rtw_secmicappend(&micdata, &pframe[16], 6);  /* DA */
-				if (pframe[1] & 2) /* From Ds==1 */
+				if (pframe[1] & 2) {/* From Ds==1 */
 					rtw_secmicappend(&micdata, &pframe[24], 6);
-				else
+				} else {
 					rtw_secmicappend(&micdata, &pframe[10], 6);
+				}
 			} else {	/* ToDS==0 */
 				rtw_secmicappend(&micdata, &pframe[4], 6);   /* DA */
-				if (pframe[1] & 2) /* From Ds==1 */
+				if (pframe[1] & 2) {/* From Ds==1 */
 					rtw_secmicappend(&micdata, &pframe[16], 6);
-				else
+				} else {
 					rtw_secmicappend(&micdata, &pframe[10], 6);
+				}
 
 			}
 
@@ -2479,8 +2486,9 @@ s32 rtw_xmit_tdls_coalesce(_adapter *padapter, struct xmit_frame *pxmitframe, st
 	else {
 		if (bmcst)
 			psta = rtw_get_bcmc_stainfo(padapter);
-		else
+		else {
 			psta = rtw_get_stainfo(&padapter->stapriv, pattrib->ra);
+		}
 	}
 
 	if (psta == NULL) {
