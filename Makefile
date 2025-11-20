@@ -1326,13 +1326,22 @@ EXTRA_CFLAGS += -DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT
 EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
 EXTRA_CFLAGS += -DRTW_P2P_GROUP_INTERFACE=1
 EXTRA_CFLAGS += -DCONFIG_IFACE_NUMBER=3
-
+ifndef ARCH
 SUBARCH := $(shell uname -m | sed -e s/i.86/i386/)
 ARCH ?= $(SUBARCH)
+endif
+ifndef CROSS_COMPILE
 CROSS_COMPILE ?=
+endif
+ifndef KVER
 KVER  := $(shell uname -r)
+endif
+ifndef KSRC
 KSRC := /lib/modules/$(KVER)/build
+endif
+ifndef MODDESTDIR
 MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/
+endif
 INSTALL_PREFIX :=
 STAGINGMODDIR := /lib/modules/$(KVER)/kernel/drivers/staging
 endif
