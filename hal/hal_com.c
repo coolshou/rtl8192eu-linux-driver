@@ -6366,8 +6366,7 @@ static void rtw_hal_ap_wow_enable(_adapter *padapter)
 	rtw_hal_set_output_gpio(padapter, pwrpriv->wowlan_gpio_index, val8);
 	rtw_hal_switch_gpio_wl_ctrl(padapter, pwrpriv->wowlan_gpio_index, _TRUE);
 	RTW_INFO("%s: set GPIO_%d to OUTPUT %s state in ap wow suspend and %s_ACTIVE.\n",
-		 __func__, pwrpriv->wowlan_gpio_index, 
-		 pwrpriv->wowlan_gpio_output_state ? "HIGH" : "LOW",
+		 __func__, pwrpriv->wowlan_gpio_index, val8 ? "HIGH" : "LOW",
 		 pwrpriv->is_high_active ? "HIGI" : "LOW");
 #endif /* CONFIG_WAKEUP_GPIO_INPUT_MODE */
 #endif /* CONFIG_RTW_ONE_PIN_GPIO */
@@ -10299,8 +10298,7 @@ static void rtw_hal_wow_enable(_adapter *adapter)
 	rtw_hal_set_output_gpio(adapter, pwrctl->wowlan_gpio_index, val8);
 	rtw_hal_switch_gpio_wl_ctrl(adapter, pwrctl->wowlan_gpio_index, _TRUE);
 	RTW_INFO("%s: set GPIO_%d to OUTPUT %s state in wow suspend and %s_ACTIVE.\n",
-		 __func__, pwrctl->wowlan_gpio_index, 
-		 pwrctl->wowlan_gpio_output_state ? "HIGH" : "LOW",
+		 __func__, pwrctl->wowlan_gpio_index, val8 ? "HIGH" : "LOW",
 		 pwrctl->is_high_active ? "HIGI" : "LOW");
 #endif /* CONFIG_WAKEUP_GPIO_INPUT_MODE */
 #endif /* CONFIG_RTW_ONE_PIN_GPIO */

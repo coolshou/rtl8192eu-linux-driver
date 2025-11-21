@@ -2295,7 +2295,7 @@ void rtw_init_pwrctrl_priv(PADAPTER padapter)
 
 #ifdef CONFIG_GPIO_WAKEUP
 	pwrctrlpriv->wowlan_gpio_index = WAKEUP_GPIO_IDX;
-	/* set output low state in initial */
+	/* driver always sets output low state except it gets into wowlan mode. */
 	pwrctrlpriv->wowlan_gpio_output_state = GPIO_OUTPUT_LOW;
 	/*default low active*/
 	pwrctrlpriv->is_high_active = HIGH_ACTIVE_DEV2HST;
