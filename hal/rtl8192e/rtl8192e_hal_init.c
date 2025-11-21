@@ -1103,7 +1103,7 @@ Hal_EfusePowerSwitch8192E(
 		if (bWrite == _TRUE) {
 			/* Enable LDO 2.5V before read/write action */
 			tempval = rtw_read8(pAdapter, EFUSE_TEST + 3);
-			tempval &= 0x07; /* 0x34[30:27] = 4¡¦1110 => LDOE25 voltage select to 2.25V Suggested by SD1 Jackie & DD -Tm_lin */
+			tempval &= 0x07; /* 0x34[30:27] = 4ï¿½ï¿½1110 => LDOE25 voltage select to 2.25V Suggested by SD1 Jackie & DD -Tm_lin */
 			/* tempval |= (VOLTAGE_V25 << 4); */
 			tempval |= 0x70;
 			rtw_write8(pAdapter, EFUSE_TEST + 3, (tempval | 0x80));
@@ -4461,7 +4461,7 @@ static void read_chip_version_8192e(PADAPTER Adapter)
 	RTW_INFO("%s 0xF0 = 0x%x\n", __FUNCTION__, value32);
 
 	pHalData->version_id.ICType = CHIP_8192E;
-	pHalData->version_id.RFType = (value32 & RF_TYPE_ID) ? RF_2T2R : RF_1T1R;
+	pHalData->version_id.RFType = (HAL_RF_TYPE_E)((value32 & RF_TYPE_ID) ? RF_2T2R : RF_1T1R);
 	pHalData->version_id.ChipType = ((value32 & RTL_ID) ? TEST_CHIP : NORMAL_CHIP);
 
 	tmpvdr = (value32 & EXT_VENDOR_ID) >> EXT_VENDOR_ID_SHIFT;
