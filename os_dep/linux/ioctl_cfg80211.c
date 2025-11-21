@@ -16,7 +16,6 @@
 
 #include <drv_types.h>
 #include <hal_data.h>
-#include <linux/version.h>
 
 #ifdef CONFIG_IOCTL_CFG80211
 
