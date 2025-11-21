@@ -413,8 +413,9 @@ void dynamic_napi_th_chk (_adapter *adapter)
 		registry = &adapter->registrypriv;
 		if (dvobj->traffic_stat.cur_rx_tp > registry->napi_threshold)
 			dvobj->en_napi_dynamic = 1;
-		else
+		else {
 			dvobj->en_napi_dynamic = 0;
+		}
 	}
 
 }
@@ -501,8 +502,9 @@ void rtw_os_recv_indicate_pkt(_adapter *padapter, _pkt *pkt, union recv_frame *r
 		ret = rtw_netif_rx(padapter->pnetdev, pkt);
 		if (ret == NET_RX_SUCCESS)
 			DBG_COUNTER(padapter->rx_logs.os_netif_ok);
-		else
+		else {
 			DBG_COUNTER(padapter->rx_logs.os_netif_err);
+		}
 	}
 }
 
@@ -525,15 +527,17 @@ void rtw_handle_tkip_mic_err(_adapter *padapter, struct sta_info *sta, u8 bgroup
 			psecuritypriv->btkip_countermeasure = _TRUE;
 			psecuritypriv->last_mic_err_time = 0;
 			psecuritypriv->btkip_countermeasure_time = cur_time;
-		} else
+		} else {
 			psecuritypriv->last_mic_err_time = rtw_get_current_time();
+		}
 	}
 
 #ifdef CONFIG_IOCTL_CFG80211
 	if (bgroup)
 		key_type |= NL80211_KEYTYPE_GROUP;
-	else
+	else {
 		key_type |= NL80211_KEYTYPE_PAIRWISE;
+	}
 
 	cfg80211_michael_mic_failure(padapter->pnetdev, sta->cmn.mac_addr, key_type, -1, NULL, GFP_ATOMIC);
 #endif
@@ -541,8 +545,9 @@ void rtw_handle_tkip_mic_err(_adapter *padapter, struct sta_info *sta, u8 bgroup
 	_rtw_memset(&ev, 0x00, sizeof(ev));
 	if (bgroup)
 		ev.flags |= IW_MICFAILURE_GROUP;
-	else
+	else {
 		ev.flags |= IW_MICFAILURE_PAIRWISE;
+	}
 
 	ev.src_addr.sa_family = ARPHRD_ETHER;
 	_rtw_memcpy(ev.src_addr.sa_data, sta->cmn.mac_addr, ETH_ALEN);
